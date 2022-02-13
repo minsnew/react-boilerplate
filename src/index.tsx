@@ -6,6 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 
+if (process.env?.REACT_APP_MSW_START && process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { worker } = require('./mocks/browser');
+  worker.start();
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
